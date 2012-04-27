@@ -8,12 +8,17 @@
 	<div><input type="text" name="title" size="80" style="width:100%"/></div>
 	<div class="ilabel">Description:</div>
 	<div><textarea name="description" rows="5" cols="44" style="width:100%"/></textarea></div>
+  <table border=0 cellspacing=0 cellpadding=0><tr valign=top>
+  <td>
 	<div class="ilabel">Options:</div>
 	<div><input class="ioption" type="text" name="option1" size="60" value="{{option_one}}"/></div>
 	<div><input class="ioption" type="text" name="option2" size="60" value="{{option_two}}"/></div>
 	<div><input class="ioption" type="text" name="option3" size="60"/></div>
 	<div><input class="ioption" type="text" name="option4" size="60"/></div>
 	<div><input class="ioption" type="text" name="option5" size="60"/></div>
+  </td>
+  <td width=10>&nbsp;</td>
+  <td>
 	<!-- <div><input type="checkbox" name="allow_add"/>Allow members to add choices (coming soon)</div> -->
 	<div class="ilabel">Duration:</div>
 	<div><select name="duration_amount">
@@ -41,7 +46,7 @@
         </select>
 	</div>
 	<div class="ilabel">Visibility:</div>
-	<div><select name="visibility">
+	<div><select name="visibility" size="2" style="font-size:14px">
         	<option value="private" selected>Private (email link only)</option>
         	<option value="public">Public (all members)</option>
         <!--
@@ -57,6 +62,7 @@
         	-->
         </select>
     </div>
+   </td></tr></table>
 	</br>
 	<div><input type="submit" value="Create Issue"></div>
 </form>

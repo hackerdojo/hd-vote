@@ -4,15 +4,18 @@
 <div id="primary">
 
 	{% if issue.member_is_creator %}
-    	This issue is currently private.  You may share it by copy and pasting the following url into an email: <b>{{issueUrl}}</b>
+  <fieldset style="float:right; width:250px; font-size:14px"><legend>Admin</legend>
+    	This issue is <b>{{issue.visibility}}</b>.  {% ifequal issue.visibility "private" %}You may share it by copy and pasting the following url into an email:{% endifequal %}
+      <p style="margin-bottom:0"><input type=text style="width:100%" value="{{issueUrl}}">
     	{% if issue.is_active %}
-			<form method="get" action="/edit/{{issue.key.id}}"><input type = "submit" value="edit"/></form>
+			<form style="margin:0" method="get" action="/edit/{{issue.key.id}}"><input type = "submit" value="Edit Issue Details"/></form>
 			<!--
 			<form method="post">
 				<input type = "submit" value="stop voting early"/>(coming soon)
 			</form>
 			-->
     	{% endif %}
+  </fieldset>
     {% endif %}
     
     <h3>{{issue.title|title}}</h3>
@@ -22,10 +25,11 @@
     
     {% if issue.is_active %}
     	{% if vote %}Your current vote is <b>{{vote.choice.name}}</b>{% endif %}
-    	<form method="post">
+    	<form method="post" style="margin:1em; padding:1em; border:1px dotted #666; width:550px">
     		{% for choice in issue.choices %}
     			<input type = "radio" name="choice" value="{{choice.key.id}}" {% if choice.is_member_vote %} checked {% endif %} /> {{choice.name}}</br>
     		{% endfor %}
+        <br>
     		{% if vote %}
     			<input type = "submit" value="Change Vote"/>
     		{% else %}

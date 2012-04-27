@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>New Issue</h1>
+<h2 style="margin-bottom:1em">Create a New Issue (member poll)</h2>
 
-<form method="post">
-	Issue Title:
-	<div><input type="text" name="title" size="60"/></div>
-	Issue:
-	<div><textarea name="description" rows="5" cols="44"/></textarea></div>
-	Options:
-	<div><input type="text" name="option1" size="60" value="{{option_one}}"/></div>
-	<div><input type="text" name="option2" size="60" value="{{option_two}}"/></div>
-	<div><input type="text" name="option3" size="60"/></div>
-	<div><input type="text" name="option4" size="60"/></div>
-	<div><input type="text" name="option5" size="60"/></div>
+<form method="post" class="iform">
+	<div class="ilabel">Issue Title:</div>
+	<div><input type="text" name="title" size="80" style="width:100%"/></div>
+	<div class="ilabel">Description:</div>
+	<div><textarea name="description" rows="5" cols="44" style="width:100%"/></textarea></div>
+	<div class="ilabel">Options:</div>
+	<div><input class="ioption" type="text" name="option1" size="60" value="{{option_one}}"/></div>
+	<div><input class="ioption" type="text" name="option2" size="60" value="{{option_two}}"/></div>
+	<div><input class="ioption" type="text" name="option3" size="60"/></div>
+	<div><input class="ioption" type="text" name="option4" size="60"/></div>
+	<div><input class="ioption" type="text" name="option5" size="60"/></div>
 	<!-- <div><input type="checkbox" name="allow_add"/>Allow members to add choices (coming soon)</div> -->
-	Duration:
+	<div class="ilabel">Duration:</div>
 	<div><select name="duration_amount">
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -40,7 +40,7 @@
         	<option>the first vote</option>
         </select>
 	</div>
-	Visibility: (coming soon)
+	<div class="ilabel">Visibility:</div>
 	<div><select name="visibility">
         	<option value="private" selected>Private (email link only)</option>
         	<option value="public">Public (all members)</option>

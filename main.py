@@ -16,18 +16,18 @@ class MainPage(webapp.RequestHandler):
 			logout_url = users.create_logout_url('/')
 		else:
 			login_url = users.create_login_url('/')
-		issues = Issue.all().order('creation_date').fetch(30)
+		issues = Issue.all().order('-creation_date').filter('visibility',"public").fetch(30)
 		success_type = self.request.get('success')
 		success_msg = None
 		if success_type == 'vote':
 			success_msg = 'Your vote was successfully cast!'
 		if success_type == 'updated':
 			success_msg = 'Your vote was successfully updated!'
-		created_by = Issue.issues_created_by(member=user,limit=20)
-		voted_on = Issue.issues_voted_on(member=user,limit=20)
+		#created_by = Issue.issues_created_by(member=user,limit=20)
+		#voted_on = Issue.issues_voted_on(member=user,limit=20)
 		#recent_results = [issue for issue in voted_on if issue.has_results]
-		recent_voted = [issue for issue in voted_on if issue.is_active()]
-		recent_results = Issue.recent_results(limit=20)
+		#recent_voted = [issue for issue in voted_on if issue.is_active()]
+		#recent_results = Issue.recent_results(limit=20)
 		self.response.out.write(template.render('templates/overview.html', locals()))
 		
 		
@@ -52,7 +52,9 @@ class NewHandler(webapp.RequestHandler):
 		
 		duration_amount = int(self.request.get('duration_amount'))
 		multiplier = int(self.request.get('duration_multiplier'))
+		visibility = self.request.get('visibility')
 		issue = Issue(
+      visibility = visibility,
 			title = cgi.escape(self.request.get('title')),
 			description = cgi.escape(self.request.get('description')),
 			duration = duration_amount * multiplier,

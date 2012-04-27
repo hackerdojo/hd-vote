@@ -37,6 +37,18 @@ indexes:
   - name: end_time
     direction: desc
 
+- kind: Issue
+  properties:
+  - name: visibility
+  - name: creation_date
+    direction: desc
+
+- kind: Issue
+  properties:
+  - name: visibility=
+  - name: creation_date
+    direction: desc
+
 - kind: Vote
   properties:
   - name: member

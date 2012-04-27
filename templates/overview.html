@@ -1,44 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="/new" method="get">
-	<div><input type="submit" value="New Issue"></div>
-</form>
+<style>
+table#issues {border-top:1px solid #999; border-left:1px solid #999;}
+table#issues td, table#issues th {text-align:left;  border-bottom:1px solid #999; border-right:1px solid #999;}
+table#issues td {font-size:14px}
+.mid {text-align:center !important}
+</style>
 
-{% if success_msg %}
-	<div class="success_msg"><b>{{success_msg}}</b></div>
-{% endif %}
-
-<!--
-<h3>Current Issues</h3>
 {% if user %}
-	{% for issue in issues %}
-		<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
-	{% endfor %}
+
+  <h2>Create a New Issue (member poll)</h2>
+  
+  <form action="/new" method="get">
+  	<div><input type="submit" value="Create New"></div>
+  </form>
+  
+  {% if success_msg %}
+  	<div class="success_msg"><b>{{success_msg}}</b></div>
+  {% endif %}
+  
+  <h2 style="margin-top:2em">Recently Created Public Issues</h2>
+  <table border=0 cellpadding=2 cellspacing=0 id="issues" width=100%>
+  <tr><th width=80%>Issue</th><th class="mid" width=10%>Votes</th><th class="mid" width=10%>Status</th></tr>
+  {% if issues %}
+  {% for issue in issues %}
+    <tr>
+      <td><a style="font-weight:normal" href="/issue/{{issue.key.id}}">{{issue.title|title}} ({{issue.visibility}})</a></td>
+      <td class="mid">{{issue.vote_count}}<td class="mid">{{issue.status}}</td>
+    </tr>
+  {% endfor %}
+  {% else %}
+   <td colspan=3 style="padding:6px"><i>No issues</i></td>
+  {% endif %}
+  </table>
+
 {% else %}
-	<b>You must log in to vote</b>
+	<p>This system may be used by any member of Hacker Dojo to create a poll for any reason.</p>
+  <input type=submit value=Login onclick='document.location.href="{{login_url}}"'/>
 {% endif %}
 
-<h3>Recent Results</h3>
-{% for issue in recent_results %}
-	<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
-{% endfor %}
-
-<h3>Recent Votes</h3>
-{% for issue in recent_voted %}
-	<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
-{% endfor %}
-
-{% if user %}
-	<h3>My Issues</h3>
-	{% if created_by %}
-		{% for issue in created_by %}
-			<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
-		{% endfor %}
-	{% else %}
-		You have not created any issues yet
-	{% endif %}
-{% endif %}
--->
+<p>&nbsp;</p>
 
 {% endblock %}

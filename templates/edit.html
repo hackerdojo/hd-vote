@@ -93,22 +93,23 @@
 				<option>the first vote</option>
 			</select>
 		</div>
-		Visibility: (coming soon)
-		<div><select>
-				<option selected>Private (email link only)</option>
-				<!--
-				<option>All members</option>
-				<optgroup label="Member Group">
-					<option>Events</option>
-					<option>Operations</option>
-					<option>Other team</option>
-				</optgroup>
-				<optgroup label="Private Group">
-					<option>Directors</option>
-					<option>Other Private Group</option>
-				</optgroup>
-				-->
-			</select>
+		Visibility: 
+		<div><select name="visibility">
+        	<option value="private" {% ifequal issue.visibility "private" %}selected{% endifequal %}>Private (email link only)</option>
+        	<option value="public" {% ifequal issue.visibility "public" %}selected{% endifequal %}>Public (all members)</option>
+        <!--
+        	<optgroup label="Member Group">
+        		<option>Events</option>
+        		<option>Operations</option>
+        		<option>Other team</option>
+        	</optgroup>
+        	<optgroup label="Private Group">
+        		<option>Directors</option>
+        		<option>Other Private Group</option>
+        	</optgroup>
+        	-->
+        </select>
+
 		</div>
 		</br>
 		<div><input type="submit" value="Save Changes" name="save_changes"></div>

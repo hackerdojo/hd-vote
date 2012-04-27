@@ -1,28 +1,75 @@
 <html>
 	<head>
-		<title>Hacker Dojo Member Vote</title>
-        {% block feed %}
-            <link rel="alternate" type="application/xml" title="Hacker Dojo Member" href="/events.rss" />
-        {% endblock %}
+<style>
 
+  
+
+body {
+  font-family: arial, helvetica;
+  margin:2em 0;
+  background: #d32424;
+}
+
+.content {
+  background: #fff;
+  margin:0 auto;
+  padding:36px;
+  padding-bottom:18px;
+  border:4px solid #ccc;
+  border-radius:18px;
+  -moz-border-radius:18px;
+  -webkit-border-radius:18px;
+}
+
+h1,h2,h3 {
+  color:#333;
+  font-weight:strong;
+  margin-bottom:.5em;
+}
+
+h2 {
+  font-size:16px;
+}
+
+a {
+  color:#0885c8;
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+label {
+  color:#105984;
+  font-size:20px;
+}
+
+#header { border-bottom:1px solid #999; margin-bottom:2.0em}
+
+</style>
+		<title>Hacker Dojo Member Powered Voting System</title>
 	</head>
 	<body>
-		<div id="top">
+<div class="content" style="width:900px">
+		<div style="float:right">
 			{% if user %}
-			<span><strong>{{user.email}}</strong> <!--| <a href="/myvotes">My Votes</a> --> | <a href="{{logout_url}}">Logout</a></span>
+  			<span>{{user.email}} | <a href="{{logout_url}}">Logout</a></span>
 			{% else %}
-			<span><a style="font-weight: bold;" href="{{login_url}}">Login</a> | <a href="http://signup.hackerdojo.com/upgrade/needaccount">Need an account?</a></span>
+  			<span><a style="font-weight: bold;" href="{{login_url}}">Login</a>
 			{% endif %}
 		</div>
 		<div id="wrapper">
 			<div id="header">
-				<img src="/static/dojo_icon.png" style="float: left;" />
-				<h1>Member Vote</h1>
-			</div>
+				<a href="/"><img src="/static/logo250.png" border="0"/></a>
+				<p style="margin-bottom:0">Member Powered Voting System</p>
+			</div>      
 			<div id="content">
 				{% block content %}{% endblock %}
 			</div>
 		</div>
+
+    </div>
 
 	</body>
 </html>

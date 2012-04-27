@@ -12,6 +12,7 @@ class Issue(db.Model):
 	is_public = db.BooleanProperty(default=False) #is issue listed on site or just by sharing url?
 	creator = db.UserProperty(auto_current_user=True)
 	title = db.StringProperty(required=True)
+	visibility = db.StringProperty()
 	description = db.TextProperty()
 	duration = db.IntegerProperty()
 	creation_date = db.DateTimeProperty(auto_now_add=True)

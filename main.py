@@ -144,7 +144,7 @@ class IssueHandler(webapp.RequestHandler):
 		vote = issue.vote_for_member(user)
 
 		issueUrl = self.request.uri
-		self.response.out.write(template.render('templates/Issue.html', locals()))
+		self.response.out.write(template.render('templates/issue.html', locals()))
 		
 		
 	def post(self,id):

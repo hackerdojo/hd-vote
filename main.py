@@ -3,7 +3,7 @@ from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp import util, template
 from google.appengine.api import urlfetch, memcache, users, mail
 
-import logging, urllib, os
+import logging, urllib, os, random
 from datetime import datetime, timedelta
 
 from models import Issue, Choice, Vote

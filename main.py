@@ -52,6 +52,7 @@ class NewHandler(webapp.RequestHandler):
 		
 		duration_amount = int(self.request.get('duration_amount'))
 		multiplier = int(self.request.get('duration_multiplier'))
+		hashcode = random_string()
 		issue = Issue(
 			title = cgi.escape(self.request.get('title')),
 			description = cgi.escape(self.request.get('description')),
@@ -69,9 +70,8 @@ class NewHandler(webapp.RequestHandler):
 		if self.request.get('option5'):
 			issue.add_choice(cgi.escape(self.request.get('option5')))
 		
-		self.redirect('/issue/%s' % (issue.key().id()))
-
-
+		#self.redirect('/issue/%s' % (issue.key().id()))
+		self.redirect('/issue/%s' % hashcode)
 
 class EditHandler(webapp.RequestHandler):
 	def get(self,id):
@@ -163,7 +163,9 @@ class IssueHandler(webapp.RequestHandler):
 			self.redirect('/?success=vote')
 		
 
-
+def random_string():
+    hashbase = 'abcd1234'
+    return ''.join(random.sample(hashbase,len(hashbase)))
 
 def main():
 	application = webapp.WSGIApplication([

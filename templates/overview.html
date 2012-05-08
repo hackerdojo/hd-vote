@@ -12,7 +12,7 @@
 <h3>Current Issues</h3>
 {% if user %}
 	{% for issue in issues %}
-		<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
+		<a href="/issue/{{issue.urlcode}}">{{issue.title}}</a></br>
 	{% endfor %}
 {% else %}
 	<b>You must log in to vote</b>
@@ -20,19 +20,19 @@
 
 <h3>Recent Results</h3>
 {% for issue in recent_results %}
-	<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
+	<a href="/issue/{{issue.urlcode}}">{{issue.title}}</a></br>
 {% endfor %}
 
 <h3>Recent Votes</h3>
 {% for issue in recent_voted %}
-	<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
+	<a href="/issue/{{issue.urlcode}}">{{issue.title}}</a></br>
 {% endfor %}
 
 {% if user %}
 	<h3>My Issues</h3>
 	{% if created_by %}
 		{% for issue in created_by %}
-			<a href="/issue/{{issue.key.id}}">{{issue.title}}</a></br>
+			<a href="/issue/{{issue.urlcode}}">{{issue.title}}</a></br>
 		{% endfor %}
 	{% else %}
 		You have not created any issues yet

@@ -2,16 +2,11 @@
 {% block content %}
 
 <div id="primary">
-
 	{% if issue.member_is_creator %}
     	This issue is currently private.  You may share it by copy and pasting the following url into an email: <b>{{issueUrl}}</b>
     	{% if issue.is_active %}
-			<form method="get" action="/edit/{{issue.key.id}}"><input type = "submit" value="edit"/></form>
-			<!--
-			<form method="post">
-				<input type = "submit" value="stop voting early"/>(coming soon)
-			</form>
-			-->
+			<form method="get" action="/edit/{{issue.urlcode}}"><input type = "submit" value="edit"/></form>
+
     	{% endif %}
     {% endif %}
     
@@ -68,6 +63,5 @@
     
     
 </div>
-
 
 {% endblock %}

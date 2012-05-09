@@ -132,9 +132,9 @@ class Issue(db.Model):
 		#member_votes = Vote.all().filter('member =',member).fetch(limit)
 		#return [vote.issue for vote in member_votes if vote.issue.has_results()]
 
-	@classmethod
-	def get_issue_by_urlcode(cls, urlcode):
-                return cls.all().filter('urlcode =',urlcode).get()
+#	@classmethod
+#	def get_issue_by_urlcode(cls, urlcode):
+#                return cls.all().filter('urlcode =',urlcode).get()
 			
 class Choice(db.Model):
 	"""Represents a possible response to an issue (e.g. Yes)"""

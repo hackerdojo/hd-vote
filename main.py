@@ -131,14 +131,14 @@ class EditHandler(webapp.RequestHandler):
 
 class IssueHandler(webapp.RequestHandler):
 	def get(self,urlcode):
-#		user = users.get_current_user()
-	#	if user:
-		#	logout_url = users.create_logout_url('/')
-		#else:
-		#	self.redirect(users.create_login_url(self.request.uri))
-		#	return
+		user = users.get_current_user()
+		if user:
+			logout_url = users.create_logout_url('/')
+		else:
+			self.redirect(users.create_login_url(self.request.uri))
+			return
 		
-		#issue = Issue.get_by_id(int(id))
+		#issue = Issue.get_by_id(urlcode)
 		#issue = Issue.get_issue_by_urlcode(urlcode)
 		#issue = Issue.get_by_urlcode(urlcode)
 		#issue.update_status()
@@ -146,7 +146,7 @@ class IssueHandler(webapp.RequestHandler):
 		#vote = issue.vote_for_member(user)
 
 		#issueUrl = self.request.uri
-                #self.response.out.write(urlcode + '4')
+                self.response.out.write(urlcode + '4')
 		
 		self.response.out.write(template.render('templates/issue.html', locals()))
 		
@@ -157,7 +157,7 @@ class IssueHandler(webapp.RequestHandler):
 			self.redirect(users.create_login_url(self.request.uri))
 			return
 		
-		#issue = Issue.get_by_id(int(id))
+		#issue = Issue.get_by_id(urlcode)
                 #issue = Issue.get_by_url(urlcode)
 		#issue = Issue.get_issue_by_urlcode(urlcode)
 		#vote = issue.vote_for_member()

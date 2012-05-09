@@ -69,7 +69,6 @@ class NewHandler(webapp.RequestHandler):
 		if self.request.get('option5'):
 			issue.add_choice(cgi.escape(self.request.get('option5')))
 		
-		#self.redirect('/issue/%s' % (issue.key().id()))
 		self.redirect('/issue/%s' % issue.urlcode)
 
 class EditHandler(webapp.RequestHandler):
@@ -80,9 +79,7 @@ class EditHandler(webapp.RequestHandler):
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 			return
-		#issue = Issue.get_by_id(int(id))
-		#issue = Issue.get_by_urlcode(urlcode)
-		#issue = Issue.get_issue_by_urlcode(urlcode)
+		issue = Issue.get_issue_by_urlcode(urlcode)
 		choices = issue.choices
 		self.response.out.write(template.render('templates/edit.html', locals()))
 
@@ -93,9 +90,7 @@ class EditHandler(webapp.RequestHandler):
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 			return
-		#issue = Issue.get_by_id(int(id))
-		#issue = Issue.get_by_urlcode(urlcode)
-		#issue = Issue.get_issue_by_urlcode(urlcode)
+		issue = Issue.get_issue_by_urlcode(urlcode)
 
 		if self.request.get('extend'):#if extending vote
 			choices = issue.choices
@@ -138,16 +133,13 @@ class IssueHandler(webapp.RequestHandler):
 			self.redirect(users.create_login_url(self.request.uri))
 			return
 		
-		issue = Issue.get_by_id(int(urlcode))
-		#issue = Issue.get_issue_by_urlcode(urlcode)
-		#issue = Issue.get_by_urlcode(urlcode)
-		#issue.update_status()
+		issue = Issue.get_issue_by_urlcode(urlcode)
+		issue.update_status()
 		
 		#vote = issue.vote_for_member(user)
 
 		#issueUrl = self.request.uri
 		
-                #self.response.out.write(urlcode + '4')
 		self.response.out.write(template.render('templates/issue.html', locals()))
 		
 		
@@ -158,9 +150,7 @@ class IssueHandler(webapp.RequestHandler):
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 		
-		issue = Issue.get_by_id(int(urlcode))
-                #issue = Issue.get_by_url(urlcode)
-		#issue = Issue.get_issue_by_urlcode(urlcode)
+                issue = Issue.get_issue_by_urlcode(urlcode)
 		#vote = issue.vote_for_member()
 		
 		new_choice = Choice.get_by_id(int(self.request.get('choice')))
@@ -173,15 +163,15 @@ class IssueHandler(webapp.RequestHandler):
 		
 
 def random_string():
-    hashbase = 'abcd1234'
+    hashbase = '1234567890abcdefghijklmnopqrstuvwxyz'
     return ''.join(random.sample(hashbase,len(hashbase)))
 
 def main():
 	application = webapp.WSGIApplication([
 		('/',MainPage),
 		('/new',NewHandler),
-		('/issue/(\d+).*',IssueHandler),
-		('/edit/(\d+).*',EditHandler)],
+		('/issue/(\w+).*',IssueHandler),
+		('/edit/(\w+).*',EditHandler)],
 		debug=True)
 	util.run_wsgi_app(application)
 	

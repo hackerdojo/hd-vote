@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div id="primary">
+{{issue.urlcode}}
 
+<div id="primary">
 	{% if issue.member_is_creator %}
     	This issue is currently private.  You may share it by copy and pasting the following url into an email: <b>{{issueUrl}}</b>
     	{% if issue.is_active %}

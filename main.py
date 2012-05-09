@@ -73,7 +73,7 @@ class NewHandler(webapp.RequestHandler):
 		self.redirect('/issue/%s' % issue.urlcode)
 
 class EditHandler(webapp.RequestHandler):
-	def get(self,id):
+	def get(self,urlcode):
 		user = users.get_current_user()
 		if user:
 			logout_url = users.create_logout_url('/')
@@ -81,11 +81,12 @@ class EditHandler(webapp.RequestHandler):
 			self.redirect(users.create_login_url(self.request.uri))
 			return
 		#issue = Issue.get_by_id(int(id))
-		issue = Issue.get_by_urlcode(urlcode)
+		#issue = Issue.get_by_urlcode(urlcode)
+		#issue = Issue.get_issue_by_urlcode(urlcode)
 		choices = issue.choices
 		self.response.out.write(template.render('templates/edit.html', locals()))
 
-	def post(self,id):
+	def post(self,urlcode):
 		user = users.get_current_user()
 		if user:
 			logout_url = users.create_logout_url('/')
@@ -93,8 +94,9 @@ class EditHandler(webapp.RequestHandler):
 			self.redirect(users.create_login_url(self.request.uri))
 			return
 		#issue = Issue.get_by_id(int(id))
-		issue = Issue.get_by_urlcode(urlcode)
-		
+		#issue = Issue.get_by_urlcode(urlcode)
+		#issue = Issue.get_issue_by_urlcode(urlcode)
+
 		if self.request.get('extend'):#if extending vote
 			choices = issue.choices
 			extend_amount = int(self.request.get('extend_amount')) * int(self.request.get('extend_multiplier'))
@@ -128,32 +130,36 @@ class EditHandler(webapp.RequestHandler):
 
 
 class IssueHandler(webapp.RequestHandler):
-	def get(self,id):
-		user = users.get_current_user()
-		if user:
-			logout_url = users.create_logout_url('/')
-		else:
-			self.redirect(users.create_login_url(self.request.uri))
-			return
+	def get(self,urlcode):
+#		user = users.get_current_user()
+	#	if user:
+		#	logout_url = users.create_logout_url('/')
+		#else:
+		#	self.redirect(users.create_login_url(self.request.uri))
+		#	return
 		
 		#issue = Issue.get_by_id(int(id))
-		issue = Issue.get_by_urlcode(urlcode)
-		issue.update_status()
+		#issue = Issue.get_issue_by_urlcode(urlcode)
+		#issue = Issue.get_by_urlcode(urlcode)
+		#issue.update_status()
 		
-		vote = issue.vote_for_member(user)
+		#vote = issue.vote_for_member(user)
 
-		issueUrl = self.request.uri
-		self.response.out.write(template.render('templates/Issue.html', locals()))
+		#issueUrl = self.request.uri
+                #self.response.out.write(urlcode + '4')
+		
+		self.response.out.write(template.render('templates/issue.html', locals()))
 		
 		
-	def post(self,id):
+	def post(self,urlcode):
 		user = users.get_current_user()
 		if not user: #don't want someone who is not authenticated to be able to vote
 			self.redirect(users.create_login_url(self.request.uri))
 			return
 		
 		#issue = Issue.get_by_id(int(id))
-                issue = Issue.get_by_url(urlcode)
+                #issue = Issue.get_by_url(urlcode)
+		#issue = Issue.get_issue_by_urlcode(urlcode)
 		#vote = issue.vote_for_member()
 		
 		new_choice = Choice.get_by_id(int(self.request.get('choice')))

@@ -26,7 +26,7 @@ table#issues td {font-size:14px}
   {% if issues %}
   {% for issue in issues %}
     <tr>
-      <td><a style="font-weight:normal" href="/issue/{{issue.key.id}}">{{issue.title|title}} ({{issue.visibility}})</a></td>
+      <td><a style="font-weight:normal" href="/issue/{{issue.urlcode}}">{{issue.title|title}} ({{issue.visibility}})</a></td>
       <td class="mid">{{issue.vote_count}}<td class="mid">{{issue.status}}</td>
     </tr>
   {% endfor %}

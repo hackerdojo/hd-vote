@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 
 import logging
 
-
 class Issue(db.Model):
 	"""Represents a single issue which is being voted on"""
 	status = db.StringProperty(required=True, default='active', choices=set(
@@ -18,6 +17,7 @@ class Issue(db.Model):
 	creation_date = db.DateTimeProperty(auto_now_add=True)
 	start_time = db.DateTimeProperty() #time when first vote is cast
 	end_time = db.DateTimeProperty() #time when vote will end
+	urlcode = db.StringProperty(required=True)
 	
 	#Implicit Properties:
 	#choices = Implicitly created list of choice objects
@@ -131,9 +131,11 @@ class Issue(db.Model):
 		return [issue for issue in recent if issue.vote_for_member()] #***this is probably slow
 		#member_votes = Vote.all().filter('member =',member).fetch(limit)
 		#return [vote.issue for vote in member_votes if vote.issue.has_results()]
-		
-	
-	
+
+	@classmethod
+	def get_issue_by_urlcode(cls, urlcode):
+                return cls.all().filter('urlcode =',urlcode).get()
+			
 class Choice(db.Model):
 	"""Represents a possible response to an issue (e.g. Yes)"""
 	name = db.StringProperty(required=True)
@@ -161,8 +163,6 @@ class Choice(db.Model):
 	def is_winning(self):
 		logging.info('%s in result(s) %s: %s',self.name,self.issue.winning_choices()[0].name, self.issue.winning_choices())
 		return self.key() in self.issue.winning_choices()
-
-
 	
 	
 class Vote(db.Model):

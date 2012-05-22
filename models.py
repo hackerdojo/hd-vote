@@ -40,6 +40,8 @@ class Issue(db.Model):
 		return self.votes.filter('member =',member).get()
 		
 	def register_vote(self,choice,member=None):
+		if self.has_results:
+			raise Exception('Cannot vote in closed polls.')
 		if not member:
 			member = users.get_current_user()
 		member_vote = self.vote_for_member(member)
@@ -59,6 +61,8 @@ class Issue(db.Model):
 	def extend_duration(self,hours):
 		if hours <= 0:
 			raise Exception('Negative extensions are not valid.')
+		if self.has_results:
+			raise Exception('Cannot extend closed polls.')
 		self.duration += hours
 		if self.start_time:
 			self.end_time = self.start_time + timedelta(hours=self.duration)
@@ -76,9 +80,11 @@ class Issue(db.Model):
 		return hours
 		
 	def is_active(self):
+		self.update_status()
 		return self.status in ('active')
 		
 	def has_results(self):
+		self.update_status()
 		return self.status in ('done')
 	
 	def member_is_creator(self,member=None):

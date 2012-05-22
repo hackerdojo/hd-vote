@@ -59,6 +59,8 @@ class Issue(db.Model):
 	def extend_duration(self,hours):
 		if hours <= 0:
 			raise Exception('Negative extensions are not valid.')
+		if self.has_results:
+			raise Exception('Cannot extend closed polls.')
 		self.duration += hours
 		if self.start_time:
 			self.end_time = self.start_time + timedelta(hours=self.duration)

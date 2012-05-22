@@ -57,6 +57,8 @@ class Issue(db.Model):
 		return was_changed
 		
 	def extend_duration(self,hours):
+		if hours <= 0:
+			raise Exception('Negative extensions are not valid.')
 		self.duration += hours
 		if self.start_time:
 			self.end_time = self.start_time + timedelta(hours=self.duration)

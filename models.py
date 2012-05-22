@@ -40,6 +40,8 @@ class Issue(db.Model):
 		return self.votes.filter('member =',member).get()
 		
 	def register_vote(self,choice,member=None):
+		if self.has_results:
+			raise Exception('Cannot vote in closed polls.')
 		if not member:
 			member = users.get_current_user()
 		member_vote = self.vote_for_member(member)

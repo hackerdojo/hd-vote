@@ -80,9 +80,11 @@ class Issue(db.Model):
 		return hours
 		
 	def is_active(self):
+		self.update_status()
 		return self.status in ('active')
 		
 	def has_results(self):
+		self.update_status()
 		return self.status in ('done')
 	
 	def member_is_creator(self,member=None):

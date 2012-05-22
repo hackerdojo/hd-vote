@@ -101,6 +101,9 @@ class EditHandler(webapp.RequestHandler):
 			self.response.out.write(template.render('templates/edit.html', locals()))
 			
 		else:#otherwise we are saving changes
+			if issue.vote_count:
+				raise Exception('Unable to change issue text once votes have been cast')
+
 			duration_amount = int(self.request.get('duration_amount'))
 			multiplier = int(self.request.get('duration_multiplier'))
 			issue.duration = duration_amount * multiplier

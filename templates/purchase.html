@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-bottom:1em">Propose a Purchase</h2>
+
+<p>Use this form to propose purchases from our discretionary budget.  Purchases are approved by simply majority vote of your peers during a 48 hours voting period.    NOTE: Purchases from Amazon.com will be purchased by staff for you. Purchases from other vendors will require you to make the purchase, and get <a href="http://www.hackerdojo.com/HowToUseExpensify">reimbursed</a> through the normal process.</p>
+
+<form method="post" action="/new" class="iform">
+	<div class="ilabel">Item name:</div>
+	<div><input type="text" name="title" size="80" style="width:100%" placeholder="Ryobi Drill Kit"/></div>
+	<div class="ilabel">URL:</div>
+	<div><input type="text" name="url" size="80" style="width:100%" placeholder="http://www.amazon.com/dp/B00BJ5FSB6"/></div>
+  <table border=0 style="margin-top:.5em;">
+    <tr><td><div class="ixlabel">Price: </div></td><td>$</td>
+  	<td><div><input type="text" name="price" size="5" placeholder="147.95" /></div></td></tr>
+  	<tr><td><div class="ixlabel">Quantity: </div></td><td>&nbsp;</td>
+  	<td><div><input type="text" name="qty" size="3" placeholder="1" /></div></td></tr>
+  	<tr><td><div class="ixlabel">Total: </div></td><td>$</td>
+  	<td><div><input type="text" name="total" size="7" placeholder="147.95"/> (includes tax and shipping)</div></td></tr>
+  </table>
+	<div class="ilabel">Why Hacker Dojo should purchase this:</div>
+	<div><textarea name="description" rows="3" cols="44" style="width:100%"/></textarea></div>
+  <table style="display:none" border=0 cellspacing=0 cellpadding=0><tr valign=top>
+  <td>
+	<div><input class="ioption" type="hidden" name="purchase" size="60" value="true"/></div>
+	<div><input class="ioption" type="hidden" name="option1" size="60" value="{{option_one}}"/></div>
+	<div><input class="ioption" type="hidden" name="option2" size="60" value="{{option_two}}"/></div>
+  </td>
+  <td width=10>&nbsp;</td>
+  <td>
+	<!-- <div><input type="checkbox" name="allow_add"/>Allow members to add choices (coming soon)</div> -->
+	<div class="ilabel">Duration:</div>
+	<div><select name="duration_amount">
+			<option value="2">2</option>
+        </select>
+        <select name="duration_multiplier">
+        	<option selected  value="24" selected>day(s)</option>
+        </select>
+        from
+        <select name="duration_start">
+        	<option selected>the first vote</option>
+        </select>
+	</div>
+	<div class="ilabel">Visibility:</div>
+	<div><select name="visibility" size="2" style="font-size:14px">
+        	<option selected value="public">Public (all members)</option>
+        </select>
+    </div>
+   </td></tr></table>
+	</br>
+	<div><input type="submit" value="Propose Purchase"></div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<meta http-equiv="refresh" content="5;url=http://{{host}}/issue/{{issueurl}}" />
+
+  {% if success_msg %}
+  	<div class="success_msg"><b>{{success_msg}}</b></div><br><br>
+  {% endif %}
+
+<div id="primary">
+   Redirecting you in 5 seconds to:<br>
+	<a href="/issue/{{issueurl}}">http://{{host}}/issue/{{issueurl}}</a>    
+</div>
+
+{% endblock %}

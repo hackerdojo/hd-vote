@@ -19,7 +19,7 @@
     
     <h3>{{issue.title|title}}</h3>
     
-    <div>{{issue.description}}</div>
+    <div>{{issue.description|safe}}</div>
     </br>
     
     {% if issue.is_active %}

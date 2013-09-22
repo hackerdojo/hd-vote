@@ -275,7 +275,7 @@ http://%s/issue/%s
     os.environ.get('HTTP_HOST'),
     issue.urlcode)
 
-  deferred.defer(mail.send_mail, sender='Voting Robot <robot@hackerdojo.com>', to="brian.klug@hackerdojo.com", cc=issue.creator.nickname()+"@hackerdojo.com",
+  deferred.defer(mail.send_mail, sender='Voting Robot <robot@hackerdojo.com>', to="government@hackerdojo.com", cc=issue.creator.nickname()+"@hackerdojo.com",
    subject=issue.title,
    body=body, _queue="emailthrottle")
     
@@ -307,7 +307,7 @@ http://vote.hackerdojo.com/purchase
     os.environ.get('HTTP_HOST'),
     issue.urlcode)
 
-  deferred.defer(mail.send_mail, sender='Voting Robot <robot@hackerdojo.com>', to="brian.klug@hackerdojo.com", cc=user.nickname()+"@hackerdojo.com",
+  deferred.defer(mail.send_mail, sender='Voting Robot <robot@hackerdojo.com>', to="government@hackerdojo.com", cc=user.nickname()+"@hackerdojo.com",
    subject=issue.title,
    body=body, _queue="emailthrottle")
 

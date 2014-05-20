@@ -1,7 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style>
+<style type="text/css">
+.button-style {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background-color:#D32424;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	font-style:normal;
+	height:65px;
+	line-height:65px;
+	width:49%;
+	text-decoration:none;
+	text-align:center;
+}
+.button-style:hover {
+	background-color:#B41E43;
+}.button-style:active {
+	position:relative;
+	top:1px;
+}
+h2.center {
+	text-align:center;
+}
 table#issues {border-top:1px solid #999; border-left:1px solid #999;}
 table#issues td, table#issues th {text-align:left;  border-bottom:1px solid #999; border-right:1px solid #999;}
 table#issues td {font-size:14px}
@@ -10,12 +50,13 @@ table#issues td {font-size:14px}
 
 {% if user %}
 
-  <h2>Create a New Issue (member poll)</h2>
+  <h2 class="center">Create a Poll for members, or a vote on a Purchase using the Discretionary Fund</h2>
   
-  <form action="/new" method="get">
-  	<div><input type="submit" value="Create New"></div>
-  </form>
-  
+	
+	<div>
+		<a href="/new"  class="button-style">Create New Poll</a>
+	<a href="/purchase" class="button-style">Create New Purchase</a>
+</div> 
   {% if success_msg %}
   	<div class="success_msg"><b>{{success_msg}}</b></div>
   {% endif %}

@@ -266,7 +266,7 @@ Voting Results: %s
 Yes: %s votes
 No: %s votes
 
-http://%s/issue/%s
+https://%s/issue/%s
 
 """ % (
     passed,
@@ -291,14 +291,14 @@ def notify_purchase(details,issue):
 
 ********************************************************************
 
-VOTING LINK: http://%s/issue/%s
+VOTING LINK: https://%s/issue/%s
 
 ********************************************************************
 
 Or, discuss the issue on this thread.  Any modifications will
 require a new purchase proposal.
 
-http://vote.hackerdojo.com/purchase
+https://vote.hackerdojo.com/purchase
 
 """ % (
     user.nickname(),

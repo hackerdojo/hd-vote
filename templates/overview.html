@@ -1,86 +1,105 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style type="text/css">
-.button-style {
-	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background-color:#D32424;
-	-webkit-border-top-left-radius:20px;
-	-moz-border-radius-topleft:20px;
-	border-top-left-radius:20px;
-	-webkit-border-top-right-radius:20px;
-	-moz-border-radius-topright:20px;
-	border-top-right-radius:20px;
-	-webkit-border-bottom-right-radius:20px;
-	-moz-border-radius-bottomright:20px;
-	border-bottom-right-radius:20px;
-	-webkit-border-bottom-left-radius:20px;
-	-moz-border-radius-bottomleft:20px;
-	border-bottom-left-radius:20px;
-	text-indent:0;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	color:#ffffff;
-	font-family:Arial;
-	font-size: 20px;
-	font-weight:bold;
-	font-style:normal;
-	height:45px;
-	line-height:45px;
-	width:33%;
-	text-decoration:none;
-	text-align:center;
-}
-.button-style:hover {
-	background-color:#B41E43;
-}.button-style:active {
-	position:relative;
-	top:1px;
-}
-h2.center {
-	text-align:center;
-}
-table#issues {border-top:1px solid #999; border-left:1px solid #999;}
-table#issues td, table#issues th {text-align:left;  border-bottom:1px solid #999; border-right:1px solid #999;}
-table#issues td {font-size:14px}
-.mid {text-align:center !important}
-</style>
+    <style type="text/css">
+        .button-style {
+            background-color: #B41E43;
+            -webkit-border-top-left-radius: 20px;
+            -moz-border-radius-topleft: 20px;
+            border-top-left-radius: 20px;
+            -webkit-border-top-right-radius: 20px;
+            -moz-border-radius-topright: 20px;
+            border-top-right-radius: 20px;
+            -webkit-border-bottom-right-radius: 20px;
+            -moz-border-radius-bottomright: 20px;
+            border-bottom-right-radius: 20px;
+            -webkit-border-bottom-left-radius: 20px;
+            -moz-border-radius-bottomleft: 20px;
+            border-bottom-left-radius: 20px;
+            text-indent: 0;
+            display: inline-block;
+            color: #ffffff;
+            font-style: normal;
+            height: 45px;
+            line-height: 45px;
+            width: 20%;
+            text-decoration: none;
+            text-align: center;
+            margin-right: 10px;
+        }
 
-{% if user %}
+        .button-style:active {
+            position: relative;
+            top: 1px;
+        }
+        .container-button{
+            text-align: center;
+        }
 
-  <h2 class="center">Create a Poll for members, or a vote on a Purchase using the Discretionary Fund</h2>
-  
-	
-	<div>
-		<a href="/new"  class="button-style">Create New Poll</a>
-	<a href="/purchase" class="button-style">Create New Purchase</a>
-</div> 
-  {% if success_msg %}
-  	<div class="success_msg"><b>{{success_msg}}</b></div>
-  {% endif %}
-  
-  <h2 style="margin-top:2em">Recently Created Public Issues</h2>
-  <table border=0 cellpadding=2 cellspacing=0 id="issues" width=100%>
-  <tr><th width=80%>Issue</th><th class="mid" width=10%>Votes</th><th class="mid" width=10%>Status</th></tr>
-  {% if issues %}
-  {% for issue in issues %}
-    <tr>
-      <td><a style="font-weight:normal" href="/issue/{{issue.urlcode}}">{{issue.title|title}} ({{issue.visibility}})</a></td>
-      <td class="mid">{{issue.vote_count}}<td class="mid">{{issue.status}}</td>
-    </tr>
-  {% endfor %}
-  {% else %}
-   <td colspan=3 style="padding:6px"><i>No issues</i></td>
-  {% endif %}
-  </table>
+        h2.center {
+            text-align: center;
+        }
 
-{% else %}
-	<p>This system may be used by any member of Hacker Dojo to create a poll for any reason.</p>
-  <input type=submit value=Login onclick='document.location.href="{{login_url}}"'/>
-{% endif %}
+        table#issues {
+            border-top: 1px solid #999;
+            border-left: 1px solid #999;
+        }
 
-<p>&nbsp;</p>
+        table#issues td, table#issues th {
+            text-align: left;
+            border-bottom: 1px solid #999;
+            border-right: 1px solid #999;
+        }
+
+        table#issues td {
+            font-size: 14px
+        }
+
+        .mid {
+            text-align: center !important
+        }
+    </style>
+
+    {% if user %}
+
+        <h2 class="center">Create a Poll for members, or a vote on a Purchase using the Discretionary Fund</h2>
+
+
+        <div class="container-button">
+            <a href="/new" class="button-style">New Poll</a>
+            <a href="/purchase" class="button-style">New Purchase</a>
+        </div>
+        {% if success_msg %}
+            <div class="success_msg"><b>{{ success_msg }}</b></div>
+        {% endif %}
+
+        <h2 style="margin-top:2em">Recently Created Public Issues</h2>
+        <table border=0 cellpadding=2 cellspacing=0 id="issues" width=100%>
+            <tr>
+                <th width=80%>Issue</th>
+                <th class="mid" width=10%>Votes</th>
+                <th class="mid" width=10%>Status</th>
+            </tr>
+            {% if issues %}
+                {% for issue in issues %}
+                    <tr>
+                        <td><a style="font-weight:normal" href="/issue/{{ issue.urlcode }}">{{ issue.title|title }}
+                            ({{ issue.visibility }})</a></td>
+                        <td class="mid">
+                        {{ issue.vote_count }}
+                        <td class="mid">{{ issue.status }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <td colspan=3 style="padding:6px"><i>No issues</i></td>
+            {% endif %}
+        </table>
+
+    {% else %}
+        <p>This system may be used by any member of Hacker Dojo to create a poll for any reason.</p>
+        <input type=submit value=Login onclick='document.location.href="{{ login_url }}"'/>
+    {% endif %}
+
+    <p>&nbsp;</p>
 
 {% endblock %}
